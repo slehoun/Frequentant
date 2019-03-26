@@ -8,18 +8,15 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import numpy as np
 from math import log
-
 # USR
 from Generator import Generator
 from Capturer import Capturer
 from Pitch import pitch
 
-CLIP_TIME = 0.05
-STEP_TIME =1.0
-
-FREQ_START = 13.75
+CLIP_TIME = 0.05  # number of seconds to clip from sound sample to analyze
+STEP_TIME =1.0  # length of one musical note in seconds
+FREQ_START = 13.75  # frequency to start from, 13.75Hz is A-1
 STEPS_NUM = 130
-
 # FREQ_START = 880
 # STEPS_NUM = 10
 
@@ -54,7 +51,6 @@ def main():
 
     plt.plot(worker_generator.sound_data_time, worker_generator.sound_data_values, 'b-',
              worker_capturer.sound_data_time, worker_capturer.sound_data_values, 'r-')
-    plt.legend()
     plt.title('Audio frequency response - raw data')
     plt.xlabel('time')
     plt.show()
@@ -75,14 +71,13 @@ def main():
         level_log = 10 * log(level/65536, 10)
         levels.append(level_log)
         label = '%.f' % freq
-        label += '|' + pitch(freq)
+        label += ' | ' + pitch(freq)
         freqs_labels.append(label)
 
-    print(freqs_labels)
     plt.plot(freqs, levels, 'g-')
     plt.title('Frequency response')
     plt.xlabel('frequency')
-    plt.ylabel('gain/normalized response')
+    plt.ylabel('gain/normalized response (dB)')
     plt.xscale('log')
     plt.xticks(freqs, rotation=90)
     plt.axes().set_xticklabels(freqs_labels, rotation='vertical')

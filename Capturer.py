@@ -1,8 +1,7 @@
-#!/usr/bin/python3
-#
 # Capture.py
 # Captures volume of sound signal to be used for frequency response analysis.
 
+# LIB
 import alsaaudio
 import time
 import audioop

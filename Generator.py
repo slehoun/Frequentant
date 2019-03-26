@@ -1,15 +1,14 @@
-#!/usr/bin/python3
-#
 # Generator.py
 # Generates and plays back sound signals to be used for frequency response
 # analysis.
 # Signals used are sine waves in frequencies of musical notes.
 
+# LIB
 import numpy as np
 import simpleaudio as sa
 import time
 from threading import Thread
-
+# USR
 from Pitch import pitch
 
 
@@ -33,10 +32,7 @@ class Generator(Thread):
         return audio_sine_wave
 
     def run(self):
-        # time_step = 0.5  # duration of single note
-        # freq_start = 880  # A1 tone
-        # steps = 10  # roughly up to D#10
-        multiplier = 2 ** (1.0/12)  # every other tone
+        multiplier = 2 ** (1.0/12)
 
         for step in range(int(self.steps_num)):
             n = int(20 * step/self.steps_num)
